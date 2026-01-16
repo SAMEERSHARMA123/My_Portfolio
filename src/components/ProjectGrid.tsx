@@ -15,7 +15,7 @@ import {
 import LandingPageImg from '@/assets/Landing-Page.png';
 import AdminDashboardImg from '@/assets/Screenshot (18).png';
 import VerifyEmailImg from '@/assets/Verify-Email.png';
-import RestaurantImg from '@/assets/Restaurant.png';
+
 
 const hmsKeyFeatures = [
   {
