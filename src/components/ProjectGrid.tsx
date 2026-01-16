@@ -1,33 +1,50 @@
 import { motion } from 'framer-motion';
-import { ExternalLink, Shield, Users, UtensilsCrossed, Wrench, Receipt, Layout, ShieldCheck, MailCheck } from 'lucide-react';
+import { 
+  ExternalLink, 
+  Shield, 
+  Users, 
+  UtensilsCrossed, 
+  Wrench, 
+  Receipt, 
+  Layout, 
+  ShieldCheck, 
+  MailCheck 
+} from 'lucide-react';
+
+// Import images at the top (Vite supports this)
+import LandingPageImg from '@/assets/Landing-Page.png';
+import AdminDashboardImg from '@/assets/Screenshot (18).png';
+import VerifyEmailImg from '@/assets/Verify-Email.png';
+import RestaurantImg from '@/assets/Restaurant.png';
 
 const hmsKeyFeatures = [
   {
     icon: Layout,
     title: "Elegant User Interface",
     description: "A modern and responsive landing page designed for seamless user onboarding",
-    image: "/src/assets/Landing-Page.png",
+    image: LandingPageImg,           // ← now imported variable
   },
   {
     icon: ShieldCheck,
     title: "Comprehensive Admin Panel",
     description: "Powerful dashboard to manage hotel operations, staff roles, and analytics",
-    image: "/src/assets/Screenshot (18).png",
+    image: AdminDashboardImg,
   },
   {
     icon: MailCheck,
     title: "Secure Authentication",
     description: "Robust email verification system to ensure guest and staff account security",
-    image: "/src/assets/Verify-Email.png",
+    image: VerifyEmailImg,
   },
   {
     icon: UtensilsCrossed,
     title: "Restaurant Management",
     description: "End-to-end POS system for table ordering, menu tracking, and kitchen workflow",
-    image: "/src/assets/Restaurant.png",
+    image: RestaurantImg,
   },
 ];
 
+// Rest of your component remains exactly the same
 const ProjectGrid = () => {
   return (
     <section id="projects" className="py-20 md:py-28 px-5 md:px-8 bg-gradient-to-b from-background to-muted/30">
@@ -48,7 +65,7 @@ const ProjectGrid = () => {
           </p>
         </motion.div>
 
-        {/* ===================== HMS – Main Project ===================== */}
+        {/* HMS – Main Project */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -78,7 +95,6 @@ const ProjectGrid = () => {
               </p>
             </div>
 
-            {/* Alternating feature + screenshot blocks */}
             <div className="space-y-16 md:space-y-24 lg:space-y-32">
               {hmsKeyFeatures.map((feature, index) => (
                 <motion.div
@@ -116,7 +132,7 @@ const ProjectGrid = () => {
                       className="aspect-[16/10] md:aspect-[16/9] bg-muted overflow-hidden"
                     >
                       <img
-                        src={feature.image}
+                        src={feature.image}           // ← now using imported variable
                         alt={`${feature.title} preview`}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading={index < 2 ? "eager" : "lazy"}
@@ -141,8 +157,6 @@ const ProjectGrid = () => {
             </div>
           </div>
         </motion.div>
-
-        {/* WMS card remains the same or you can slim it down / remove */}
 
       </div>
     </section>
