@@ -3,7 +3,8 @@ import { ArrowDown, CircleArrowDown } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import profilePhoto from '@/assets/profile-photo.jpeg';
 import videoMp4 from '@/assets/Gif - Trim.mp4';
-import myResume from '@/assets/Sameer Sharma Resume.pdf';
+import myResume from '@/assets/Sameer Sharma Resume .pdf';
+
 
 const titles = [
   "Full Stack Developer",
