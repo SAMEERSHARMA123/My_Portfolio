@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, Shield, Users, UtensilsCrossed, Wrench, Receipt, Layout, ShieldCheck, MailCheck } from 'lucide-react';
 import Landing from '@/assets/Landing-Page.png';
-// import AdminPanel from '@/assets/Screenshot (18).png';
+import Login from '@/assets/Login.jpg';
 import EmailVerification from '@/assets/Verify-Email.png';
 // import RestaurantManagement from '@/assets/Restaurant.png';
 
@@ -16,7 +16,7 @@ const hmsKeyFeatures = [
     icon: ShieldCheck,
     title: "Comprehensive Admin Panel",
     description: "Powerful dashboard to manage hotel operations, staff roles, and analytics",
-    // image: AdminPanel,
+     image: Login,
   },
   {
     icon: MailCheck,
