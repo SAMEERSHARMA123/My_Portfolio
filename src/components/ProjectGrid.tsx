@@ -1,9 +1,17 @@
-import { motion } from 'framer-motion';
-import { ExternalLink, Shield, Users, UtensilsCrossed, Wrench, Receipt, Layout, ShieldCheck, MailCheck } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  ExternalLink, 
+  Layout, 
+  ShieldCheck, 
+  MailCheck, 
+  UtensilsCrossed, 
+  Maximize2, 
+  X 
+} from 'lucide-react';
 import Landing from '@/assets/Landing-Page.png';
 import Login from '@/assets/Login.jpg';
 import EmailVerification from '@/assets/Verify-Email.png';
-// import RestaurantManagement from '@/assets/Restaurant.png';
 
 const hmsKeyFeatures = [
   {
@@ -16,7 +24,7 @@ const hmsKeyFeatures = [
     icon: ShieldCheck,
     title: "Comprehensive Admin Panel",
     description: "Powerful dashboard to manage hotel operations, staff roles, and analytics",
-     image: Login,
+    image: Login,
   },
   {
     icon: MailCheck,
@@ -28,15 +36,15 @@ const hmsKeyFeatures = [
     icon: UtensilsCrossed,
     title: "Restaurant Management",
     description: "End-to-end POS system for table ordering, menu tracking, and kitchen workflow",
-    // image: RestaurantManagement,
   },
 ];
 
 const ProjectGrid = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
     <section id="projects" className="py-20 md:py-28 px-5 md:px-8 bg-gradient-to-b from-background to-muted/30">
       <div className="container max-w-7xl mx-auto">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +60,6 @@ const ProjectGrid = () => {
           </p>
         </motion.div>
 
-        {/* ===================== HMS – Main Project ===================== */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -60,7 +67,6 @@ const ProjectGrid = () => {
           transition={{ duration: 0.8 }}
           className="bg-card rounded-2xl md:rounded-3xl overflow-hidden border border-border/60 shadow-xl mb-16 md:mb-24"
         >
-          {/* Browser header */}
           <div className="flex items-center gap-3 px-5 py-3.5 bg-muted/70 border-b border-border">
             <div className="flex gap-2">
               <div className="w-3.5 h-3.5 rounded-full bg-red-500/80" />
@@ -82,7 +88,6 @@ const ProjectGrid = () => {
               </p>
             </div>
 
-            {/* Alternating feature + screenshot blocks */}
             <div className="space-y-16 md:space-y-24 lg:space-y-32">
               {hmsKeyFeatures.map((feature, index) => (
                 <motion.div
@@ -95,7 +100,6 @@ const ProjectGrid = () => {
                     index % 2 === 1 ? "md:grid-flow-col-dense" : ""
                   }`}
                 >
-                  {/* Text */}
                   <div className={index % 2 === 1 ? "md:order-2" : ""}>
                     <div className="inline-flex items-center gap-3 mb-4">
                       <div className="p-3 rounded-xl bg-primary/10 text-primary">
@@ -108,20 +112,29 @@ const ProjectGrid = () => {
                     </p>
                   </div>
 
-                  {/* Big Screenshot */}
                   <div
                     className={`group relative rounded-xl md:rounded-2xl overflow-hidden border border-border/50 shadow-lg hover:shadow-2xl transition-all duration-500 ${
                       index % 2 === 1 ? "md:order-1" : ""
                     }`}
                   >
+                    {feature.image && (
+                      <button 
+                        onClick={() => setSelectedImage(feature.image)}
+                        className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-primary backdrop-blur-md text-white rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0"
+                      >
+                        <Maximize2 className="w-5 h-5" />
+                      </button>
+                    )}
+                    
                     <motion.div
                       whileHover={{ scale: 1.03 }}
                       transition={{ duration: 0.4 }}
-                      className="aspect-[16/10] md:aspect-[16/9] bg-muted overflow-hidden"
+                      className="aspect-[16/10] md:aspect-[16/9] bg-muted overflow-hidden cursor-pointer"
+                      onClick={() => feature.image && setSelectedImage(feature.image)}
                     >
                       <img
-                        src={feature.image}
-                        alt={`${feature.title} available soon`}
+                        src={feature.image || "/api/placeholder/800/500"}
+                        alt={`${feature.title}`}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         loading={index < 2 ? "eager" : "lazy"}
                       />
@@ -131,7 +144,6 @@ const ProjectGrid = () => {
               ))}
             </div>
 
-            {/* Live Demo CTA */}
             <div className="mt-16 md:mt-20 text-center">
               <a
                 href="https://hms.atsglobaltech.in"
@@ -145,10 +157,36 @@ const ProjectGrid = () => {
             </div>
           </div>
         </motion.div>
-
-        {/* WMS card remains the same or you can slim it down / remove */}
-
       </div>
+
+      {/* Lightbox Overlay */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-10 cursor-zoom-out"
+          >
+            <motion.button
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="absolute top-6 right-6 text-white hover:text-primary transition-colors"
+            >
+              <X className="w-10 h-10" />
+            </motion.button>
+            <motion.img
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              src={selectedImage}
+              className="max-w-full max-h-full rounded-lg shadow-2xl object-contain"
+              alt="Preview"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
