@@ -1,27 +1,26 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
-const codeSnippet = `// auth.schema.ts — HMS Project
+const codeSnippet = `const codeSnippet = `// auth.schema.js — HMS Project
 
-interface UserRole {
-  id: string;
-  name: 'admin' | 'manager' | 'staff';
-  permissions: Permission[];
-}
-
-const rolePermissions: Record<UserRole['name'], string[]> = {
-  admin: ['read', 'write', 'delete', 'manage_users'],
-  manager: ['read', 'write', 'manage_orders'],
-  staff: ['read', 'create_orders']
+const ROLES = {
+  ADMIN: ['read', 'write', 'delete', 'manage_users'],
+  MANAGER: ['read', 'write', 'manage_orders'],
+  STAFF: ['read', 'create_orders']
 };
 
-export const validateAccess = (
-  user: User,
-  requiredPermission: string
-): boolean => {
-  const userPermissions = rolePermissions[user.role];
-  return userPermissions.includes(requiredPermission);
-};`;
+const validateAccess = (user, permission) => {
+  if (!user?.role || !ROLES[user.role.toUpperCase()]) {
+    return false;
+  }
+  
+  const permissions = ROLES[user.role.toUpperCase()];
+  return permissions.includes(permission);
+};
+
+module.exports = { ROLES, validateAccess };`;
+
+`;
 
 const syntaxHighlight = (code: string) => {
   return code
