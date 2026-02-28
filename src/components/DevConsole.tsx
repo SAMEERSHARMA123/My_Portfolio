@@ -1,7 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-
-const codeSnippet = `const codeSnippet = `// auth.schema.js — HMS Project
+const codeSnippet = `// auth.schema.js — HMS Project
 
 const ROLES = {
   ADMIN: ['read', 'write', 'delete', 'manage_users'],
@@ -18,7 +17,7 @@ const validateAccess = (user, permission) => {
   return permissions.includes(permission);
 };
 
-module.exports = { ROLES, validateAccess };`;
+module.exports = { ROLES, validateAccess };
 
 `;
 
