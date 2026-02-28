@@ -22,7 +22,7 @@ const hmsKeyFeatures = [
   },
   {
     icon: ShieldCheck,
-    title: "Comprehensive Admin Panel",
+    title: "Comprehensive Authentication Panel",
     description: "Powerful dashboard to manage hotel operations, staff roles, and analytics",
     image: Login,
   },
